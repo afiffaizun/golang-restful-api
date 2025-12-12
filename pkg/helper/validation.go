@@ -5,12 +5,15 @@ import (
 )
 
 type ValidationError struct {
-	Field   string  `json:"field"`
-	Message string  `json:"message"`
+	Field   string `json:"field"`
+	Message string `json:"message"`
 }
 
-func ValidateStruct(s interface()) []ValidationError {
-	var errors []ValidationError
+// Tambahkan type alias ini
+type ValidationErrors []ValidationError
+
+func ValidateStruct(s interface{}) ValidationErrors {
+	var errors ValidationErrors
 	validate := validator.New()
 	err := validate.Struct(s)
 
@@ -28,13 +31,13 @@ func ValidateStruct(s interface()) []ValidationError {
 
 func getErrorMessage(err validator.FieldError) string {
 	switch err.Tag() {
-		case "required":
-			return err.Field() + " is required"
-		case "min":
-			return err.Field() + " must be at least " + err.Param() + " characters"
-		case "max":
-			return err.Field() + " must be at most " + err.Param() + " characters"
-		default:
-			return err.Field() + " is invalid"
+	case "required":
+		return err.Field() + " is required"
+	case "min":
+		return err.Field() + " must be at least " + err.Param() + " characters"
+	case "max":
+		return err.Field() + " must be at most " + err.Param() + " characters"
+	default:
+		return err.Field() + " is invalid"
 	}
 }

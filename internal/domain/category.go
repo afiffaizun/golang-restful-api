@@ -8,8 +8,8 @@ import (
 type Category struct {
 	Id  	int64    `json:"id"`
 	Name 	string   `json:"name"`
-	CreateAt time.Time `json:"create_at"`
-	UpdateAt time.Time `json:"update_at"`
+	CreateAt time.Time `json:"created_at"`
+	UpdateAt time.Time `json:"updated_at"`
 }
 
 type CategoryCreateRequest struct {
@@ -18,7 +18,7 @@ type CategoryCreateRequest struct {
 
 type CategoryUpdateRequest struct {
 	Id   int64 `json:"id" validate:"required"`
-	Name string `json:"name" validate:"required, min=3, max=100"`
+	Name string `json:"name" validate:"required,min=3,max=100"`
 }
 
 type CategoryResponse struct {
@@ -29,8 +29,8 @@ type CategoryResponse struct {
 }
 
 type CategoryRepository interface {
-	Create(ctx context.Context, category Category) CategoryRepository
-	Update(ctx context.Context, category Category) CategoryRepository
+	Create(ctx context.Context, category Category) Category
+	Update(ctx context.Context, category Category) Category
 	Delete(ctx context.Context, categoryId int64)
 	FindById(ctx context.Context, categoryId int64) (Category, error)
 	FindAll(ctx context.Context) []Category

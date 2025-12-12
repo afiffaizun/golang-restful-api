@@ -5,7 +5,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO cateogories (name) VALUES
+INSERT INTO categories (name) VALUES
 ('Electronics'),
 ('Books'),
 ('Clothing'),
