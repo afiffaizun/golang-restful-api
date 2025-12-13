@@ -54,7 +54,7 @@ func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, category
     row := repository.DB.QueryRowContext(ctx, query, categoryId)
 
     var category domain.Category
-    err := row.Scan(&category.Id, &category.Name, &category.CreatedAt, &category.UpdatedAt)
+    err := row.Scan(&category.Id, &category.Name, &category.CreateAt, &category.UpdateAt)
     if err != nil {
         if err == sql.ErrNoRows {
             return category, errors.New("category not found")
@@ -76,7 +76,7 @@ func (repository *CategoryRepositoryImpl) FindAll(ctx context.Context) []domain.
     var categories []domain.Category
     for rows.Next() {
         var category domain.Category
-        err := rows.Scan(&category.Id, &category.Name, &category.CreatedAt, &category.UpdatedAt)
+        err := rows.Scan(&category.Id, &category.Name, &category.CreateAt, &category.UpdateAt)
         if err != nil {
             panic(err)
         }
