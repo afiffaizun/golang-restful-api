@@ -18,6 +18,13 @@ func main() {
     err := godotenv.Load()
     if err != nil {
         fmt.Println("Warning: .env file not found")
+    } else {
+        fmt.Println("Environment variables loaded successfully")
+        // Debug: print DB config (jangan print password di production!)
+        fmt.Printf("DB_HOST: %s, DB_PORT: %s, DB_NAME: %s\n", 
+            os.Getenv("DB_HOST"), 
+            os.Getenv("DB_PORT"), 
+            os.Getenv("DB_NAME"))
     }
 
     // Database connection
