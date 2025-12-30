@@ -16,7 +16,7 @@ func NewCategoryService(categoryRepository domain.CategoryRepository) domain.Cat
 	}
 }
 
-func (service *CategoryServiceImpl) Create(ctx context.Context, request domain.Category) domain.CategoryResponse {
+func (service *CategoryServiceImpl) Create(ctx context.Context, request domain.CategoryCreateRequest) domain.CategoryResponse {
 
 	err := helper.ValidateStruct(request)
 	if len(err) > 0 {
@@ -30,11 +30,10 @@ func (service *CategoryServiceImpl) Create(ctx context.Context, request domain.C
 
 	category = service.CategoryRepository.Create(ctx, category)
 
-
 	return toCategoryResponse(category)
 }
 
-func (service *CategoryServiceImpl) Update(ctx context.Context, request domain.Category) domain.CategoryResponse {
+func (service *CategoryServiceImpl) Update(ctx context.Context, request domain.CategoryUpdateRequest) domain.CategoryResponse {
 
 	//Validate request
 	err := helper.ValidateStruct(request)
@@ -91,8 +90,8 @@ func (service *CategoryServiceImpl) FindAll(ctx context.Context) []domain.Catego
 
 func toCategoryResponse(category domain.Category) domain.CategoryResponse {
 	return domain.CategoryResponse{
-		Id: 	  category.Id,
-		Name:    category.Name,
+		Id:       category.Id,
+		Name:     category.Name,
 		CreateAt: category.CreateAt,
 		UpdateAt: category.UpdateAt,
 	}

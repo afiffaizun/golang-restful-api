@@ -35,3 +35,11 @@ type CategoryRepository interface {
 	FindById(ctx context.Context, categoryId int64) (Category, error)
 	FindAll(ctx context.Context) []Category
 }
+
+type CategoryService interface {
+	Create(ctx context.Context, request CategoryCreateRequest) CategoryResponse
+	Update(ctx context.Context, request CategoryUpdateRequest) CategoryResponse
+	Delete(ctx context.Context, categoryId int64)
+	FindById(ctx context.Context, categoryId int64) CategoryResponse
+	FindAll(ctx context.Context) []CategoryResponse
+}
